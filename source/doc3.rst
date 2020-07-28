@@ -1,336 +1,185 @@
-**Doc 3**
+.. |br| raw:: html
 
-**Version 1.0.0**
+     <br/>
 
-Version Notes：
+BF4004Q
 
-========== ======= ================================
-Date       Version Description
-========== ======= ================================
-2020/05/12 1.0.0   Phase-1 AT commands, first draft
-\                  
-========== ======= ================================
+AT Command Instruction Set
+
+July 2020\ **
+**
 
 **Table of Contents**
 
-1 Command Description 1
+1 Packing List 3
 
-2 Basic AT Commands 2
+2 Introduction 4
 
-2.1 Overview 2
+3 Installation 5
 
-2.2 Commands 2
+3.1 Pole Mounting 5
 
-2.2.1 AT \- Test AT 2
+3.2 Wall Mounting 6
 
-2.2.2 ATE \- Configure echo of AT commands 2
+4 QC Card 7
 
-2.2.2 AT+RST \- Restart module 2
+5 Warranty Card 8
 
-2.2.3 AT+GMR – Check version information 3
+Packing List
+============
 
-2.2.4 AT+RESTORE \- Restore factory default setting 3
+   |image0|\ |image1|\ |image2|
 
-2.2.5 AT+UART_CUR \- Current UART configuration, not save in Flash 3
+   |image3|\ |image4|\ |image5|
 
-2.2.6 AT+UART_DEF \- Default UART configuration, save in Flash 4
+.. note::
+     Some attention content |br|
 
-2.2.7 AT+SYSRAM \- Check the available RAM size 5
+.. important::
+     Some attention content |br|
 
-5 CSV Table Sample 1
+Introduction
+============
 
-
-1 Command Description
-======================
-
-.. raw:: html
-
-    <font color="blue">Blue word,</font>
+   LoRaWan Gateway’s interfaces and connectors are illustrated below:
 
 
+   **Ports and Connectors**
+
+1. Antenna Port (2.4G Wi-Fi)
+
+2. Ethernet Port (Support PoE)
+
+3. Console Port
+
+4. Nano SIM Socket
+
+5. TF Card Socket
+
+6. Ground Pad
+
+7. Ground Pad
+
+8. Antenna Port (GPS)
+
+9. Antenna Port (Lora)
+
+..
+
+   **LED**
+
+A. Power
+
+B. Ethernet
+
+C. LoRa1
+
+D. NB-IoT Active
+
+E. LoRa2 or NB-IoT Status
+
+F. WLAN
+
+Installation
+============
+
+   LoRaWan Gateway can be installed in two ways:
+
+-  Pole Mounting
+
+-  Wall Mounting
+
+Pole Mounting
+-------------
+
+   **Step 1**: Fix the mount kit on the bottom of the device with four
+   M5*8 screws as shown below:
 
 
-Some :red:`red colored text`.
-
-Some :blue:`blue colored text`. Not blue anymore.
-
-Some :big:`big text`.
-
-Each command set contains four types of AT commands：
-
-+-----------------+--------------+-----------------------------------+
-| type            | format       | description                       |
-+=================+==============+===================================+
-| Test Command    | AT+<x>=?     | Queries the Set Command’s         |
-|                 |              | internal parameters and their     |
-|                 |              | range of values.                  |
-+-----------------+--------------+-----------------------------------+
-| Query Command   | AT+<x>?      | Return the current value of       |
-|                 |              | parameters.                       |
-+-----------------+--------------+-----------------------------------+
-| Set Command     | AT+<x>=<...> | Sets the value of user-defined    |
-|                 |              | parameters in commands,           |
-|                 |              |                                   |
-|                 |              | and runs these commands.          |
-+-----------------+--------------+-----------------------------------+
-| Execute Command | AT+<x>       | Runs commands with no             |
-|                 |              | user-defined parameters.          |
-+-----------------+--------------+-----------------------------------+
+   **Step 2**: Slide the Steel band clamps through the rectangular hole
+   of the mount kit, wrap the band clamps around the pole, lock them and
+   then tighten the clamps using a screwdriver.
 
 
-Some :red:`red colored text` again!
+Wall Mounting
+-------------
 
-Notes：
-
-.. raw:: html
-
-<font color="blue">1. Not all AT commands support all four variations mentioned above.<br>2. Square brackets [ ] designate the default value; it is either not required or may not appear.</font>
-
-3. String values need to be included in double quotation marks, for
-   example: AT+CWSAP="BFQ756290","21030826", 1,4
-
-4. The default baud rate is 115200
-
-5. AT commands have to be capitalized, and must end with a new line (CR
-   LF)
+   **Step 1**: Use Ø5mm drill head, drill 4 holes on the wall according
+   to the dimension of the following picture and then plug the srew
+   anchors in the wall;
 
 
-2 Basic AT Commands
-====================================
-
-2.1 Overview
-------------
-
-=========== =============================================
-commands    description
-=========== =============================================
-AT          Test AT
-ATE         Configure echo of AT commands
-AT+RST      Restart module
-AT+GMR      Check version info
-AT+RESTORE  Restore factory default setting
-AT+UART_CUR Current UART configuration, Not save in Flash
-AT+UART_DEF Default UART configuration, save in Flash
-AT+SYSRAM   Check the available RAM size
-=========== =============================================
-
-2.2 Commands
-------------
-
-2.2.1 AT \- Test AT
-~~~~~~~~~~~~~~~~~~
-
-=============== ==
-Execute Command AT
-=============== ==
-Response        OK
-Parameters       \-
-=============== ==
-
-2.2.2 ATE \- Configure echo of AT commands
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-=============== ==
-Execute Command AT
-=============== ==
-Response        OK
-Parameters      \-
-=============== ==
-
-2.2.2 AT+RST \- Restart module
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-=============== ======
-Execute Command AT+RST
-=============== ======
-Response        OK
-Parameters      \-
-=============== ======
-
-2.2.3 AT+GMR – Check version information
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-=============== ==================
-Execute Command AT+GMR
-=============== ==================
-Response        <AT version info >
-                
-                <SDK version info>
-                
-                <compile time>
-                
-                OK
-Parameters      \-
-example         AT+GMR
-=============== ==================
-
-2.2.4 AT+RESTORE \- Restore factory default setting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+-----------------+---------------------------------------------------+
-| Execute Command | AT+RESTORE                                        |
-+=================+===================================================+
-| Response        | OK                                                |
-+-----------------+---------------------------------------------------+
-| Parameters      | \-                                                 |
-+-----------------+---------------------------------------------------+
-| Note            | The execution of this command will reset all      |
-|                 | parameters saved in flash and restore the factory |
-|                 | default settings of the module. The chip will be  |
-|                 | restarted when this command is executed           |
-|                 |   The execution of this command will reset all    |
-|                 | parameters saved in flash and restore the factory |
-|                 | default settings of the module. The chip will be  |
-|                 | restarted when this command is executed           |
-|                 |                                                   |
-+-----------------+---------------------------------------------------+
-
-2.2.5 AT+UART_CUR \- Current UART configuration, not save in Flash
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+----------------------------+----------------------------+
-| Command  | Query Command:             | Set Command：              |
-|          |                            |                            |
-|          | AT+UART_CUR?               | AT+UART                    |
-|          |                            | _CUR=<baudrate>,<databits> |
-|          |                            | ,<stopbits>,<parity>,<flow |
-|          |                            | control>                   |
-+==========+============================+============================+
-| Response | +UART                      | OK                         |
-|          | _CUR:<baudrate>,<databits> |                            |
-|          |                            |                            |
-|          | ,<stopbits>,<parity>,<flow |                            |
-|          | control>                   |                            |
-|          |                            |                            |
-|          | OK                         |                            |
-+----------+----------------------------+----------------------------+
-| Example  | AT+UART_CUR?               | AT+UART_CUR=115200,8,1,0,3 |
-+----------+----------------------------+----------------------------+
-| Note     | <baudrate>：UART baud rate |                            |
-|          |                            |                            |
-|          | <databits>：data bits      |                            |
-|          |                            |                            |
-|          | 5： 5-bit data             |                            |
-|          |                            |                            |
-|          | 6： 6-bit data             |                            |
-|          |                            |                            |
-|          | 7： 7-bit data             |                            |
-|          |                            |                            |
-|          | 8： 8-bit data             |                            |
-|          |                            |                            |
-|          | <stopbits>：stop bits      |                            |
-|          |                            |                            |
-|          | 1： 1-bit stop bit         |                            |
-|          |                            |                            |
-|          | 2： 1.5-bit stop bit       |                            |
-|          |                            |                            |
-|          | 3： 2-bit stop bit         |                            |
-|          |                            |                            |
-|          | <parity>：parity bit       |                            |
-|          |                            |                            |
-|          | 0： None                   |                            |
-|          |                            |                            |
-|          | 1： Odd                    |                            |
-|          |                            |                            |
-|          | 2： Even                   |                            |
-|          |                            |                            |
-|          | <flow control>：flow       |                            |
-|          | control                    |                            |
-|          |                            |                            |
-|          | 0：disable                 |                            |
-|          |                            |                            |
-|          | 1：enable RTS              |                            |
-|          |                            |                            |
-|          | 2：enable CTS              |                            |
-|          |                            |                            |
-|          | 3：enable both RTS and CTS |                            |
-+----------+----------------------------+----------------------------+
-
-2.2.6 AT+UART_DEF \- Default UART configuration, save in Flash
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+----------------------------+----------------------------+
-| Command  | Query Command:             | Set Command：              |
-|          |                            |                            |
-|          | AT+UART_DEF?               | AT+UART                    |
-|          |                            | _DEF=<baudrate>,<databits> |
-|          |                            | ,<stopbits>,<parity>,<flow |
-|          |                            | control>                   |
-+==========+============================+============================+
-| Response | +UART                      | OK                         |
-|          | _DEF:<baudrate>,<databits> |                            |
-|          |                            |                            |
-|          | ,<stopbits>,<parity>,<flow |                            |
-|          | control>                   |                            |
-|          |                            |                            |
-|          | OK                         |                            |
-+----------+----------------------------+----------------------------+
-| Example  | AT+UART_DEF?               | AT+UART_DEF=115200,8,1,0,3 |
-+----------+----------------------------+----------------------------+
-| Note     | <baudrate>：UART baud rate |                            |
-|          |                            |                            |
-|          | <databits>：data bits      |                            |
-|          |                            |                            |
-|          | 5： 5-bit data             |                            |
-|          |                            |                            |
-|          | 6： 6-bit data             |                            |
-|          |                            |                            |
-|          | 7： 7-bit data             |                            |
-|          |                            |                            |
-|          | 8： 8-bit data             |                            |
-|          |                            |                            |
-|          | <stopbits>：stop bits      |                            |
-|          |                            |                            |
-|          | 1： 1-bit stop bit         |                            |
-|          |                            |                            |
-|          | 2： 1.5-bit stop bit       |                            |
-|          |                            |                            |
-|          | 3： 2-bit stop bit         |                            |
-|          |                            |                            |
-|          | <parity>：parity bit       |                            |
-|          |                            |                            |
-|          | 0： None                   |                            |
-|          |                            |                            |
-|          | 1： Odd                    |                            |
-|          |                            |                            |
-|          | 2： Even                   |                            |
-|          |                            |                            |
-|          | <flow control>：flow       |                            |
-|          | control                    |                            |
-|          |                            |                            |
-|          | 0：disable                 |                            |
-|          |                            |                            |
-|          | 1：enable RTS              |                            |
-|          |                            |                            |
-|          | 2：enable CTS              |                            |
-|          |                            |                            |
-|          | 3：enable both RTS and CTS |                            |
-+----------+----------------------------+----------------------------+
-
-2.2.7 AT+SYSRAM \- Check the available RAM size
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-================ ==================================================
-Query Command    AT+SYSRAM?
-================ ==================================================
-Response         +SYSRAM:<remain RAM size>
-                 
-                 OK
-Example          AT+SYSRAM?
-Response Example +SYSRAM:30000
-                 
-                 OK
-Note             <remain RAM size>：remain space of RAM, unit: Byte
-================ ==================================================
+   **Step 2**: Use the tapping screws, attach the device to the wall.
 
 
-5 CSV Table Sample
-==================
+QC Card
+=======
 
-.. csv-table:: Sample table
-   :file: tables/sampleCSV.csv
-   :header-rows: 1
-   :class: longtable
-   :widths: auto
 
-.. _section-1:
+Warranty Card
+=============
+
+   Please fill in (*asterisk must be filled), and safekeep the warranty
+   certificate.
+
+   Please fill in the information of product:
+
+   \*Product Model:
+   \____________________________________________________________\_
+
+   \*Product ID:
+   \_______________________________________________________________\_
+
+   Please fill in the information of customer:
+
+   User’s Name:
+   \______________________________________________________________\_
+
+   Address:
+   \__________________________________________________________________\_
+
+   `Tel:
+   \_______________________\_ <Tel:________________________>`__\ \______________________________________________\_
+
+   E-mail:
+   \___________________________________________________________________\_
+
+   Please fill in the information of distributor:
+
+   \*Distributor:
+   \_______________________________________________________________\_
+
+   \*Tel:
+   \_____________________________________________________________________\_
+
+   \* Date of Purchase:
+   \__________________________________________________________\_
+
+**
+**
+
+**Revision History**
+
+======== =============== ==========
+Revision Description     Date
+1.00     Initial version 2018-07-29
+======== =============== ==========
+
+.. |image0| image:: f/media/image4.emf
+   :width: 1.91944in
+   :height: 1.91944in
+.. |image1| image:: f/media/image5.emf
+   :width: 1.91944in
+   :height: 1.91944in
+.. |image2| image:: f/media/image6.emf
+   :width: 1.91944in
+   :height: 1.91944in
+.. |image3| image:: f/media/image7.emf
+   :width: 1.91944in
+   :height: 1.91944in
+.. |image4| image:: f/media/image8.emf
+   :width: 1.91944in
+   :height: 1.91944in
+.. |image5| image:: f/media/image9.emf
+   :width: 1.91944in
+   :height: 1.91944in
